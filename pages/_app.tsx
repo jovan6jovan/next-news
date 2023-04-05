@@ -7,8 +7,9 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <div>
       <Head>
-        <title>Next News</title>
+        <title key="title">Next News</title>
         <meta
+          key="description"
           name="description"
           content="A news website created with Next.js"
         />
