@@ -11,3 +11,9 @@ export interface Article {
 export interface ArticleResponse {
   articles: Article[];
 }
+
+export interface ApiErrorResponse {
+  status: string;
+  code: string;
+  message: string;
+}

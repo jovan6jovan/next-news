@@ -1,4 +1,4 @@
-import { TOP_US_GENERAL_HEADLINES } from "@/endpoints";
+import { TOP_US_GENERAL_HEADLINES } from "@/routes";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
 import { Article, ArticleResponse } from "@/types";
 import { GetServerSideProps } from "next";
