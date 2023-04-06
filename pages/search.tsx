@@ -1,5 +1,9 @@
 import { generateSearchNewsRoute } from "@/routes";
+import Button from "@/src/components/Button/Button";
+import Input from "@/src/components/FormElements/Input/Input";
+import Label from "@/src/components/FormElements/Label/Label";
 import Spinner from "@/src/components/Spinner/Spinner";
+import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
 import { Article } from "@/types";
 import Head from "next/head";
@@ -47,25 +51,24 @@ const SearchNewsPage: FC = () => {
         <title key="title">Search news | Next News</title>
       </Head>
       <main className="container pt-5">
-        <h1 className="title">Search News</h1>
+        <Title title="Search News" />
         <form className="field" onSubmit={handleSubmit}>
-          <label className="label">Browse by category</label>
+          <Label cssClass="label">Browse by category</Label>
           <div className="control">
-            <input
-              className="input"
+            <Input
+              cssClass="input"
               type="text"
               placeholder="Sport, health, science..."
-              minLength={2}
               value={searchTerm}
               onChange={handleChange}
             />
-            <button
+            <Button
               type="submit"
-              className="button is-info mt-4"
+              cssClass="button is-info mt-4"
               disabled={searchBtnDisabled}
             >
               Search
-            </button>
+            </Button>
           </div>
         </form>
         <div className="mt-6">
