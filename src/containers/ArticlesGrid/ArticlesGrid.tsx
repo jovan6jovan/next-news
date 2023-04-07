@@ -9,7 +9,7 @@ interface Props {
 const ArticlesGrid: FC<Props> = ({ articles }) => {
   return (
     <div className="columns is-multiline">
-      {articles.map((article) => (
+      {articles?.map((article) => (
         <div
           key={article.url}
           className="column is-4-desktop is-6-tablet is-12-mobile"

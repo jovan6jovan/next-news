@@ -5,3 +5,6 @@ export const generateEverythingRoute = (searchQuery: string) =>
 
 export const generateSearchNewsRoute = (searchQuery: string) =>
   `/api/search-news?q=${searchQuery}`;
+
+export const generateTopHeadlinesByCategoryRoute = (category: string) =>
+  `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEWS_API_KEY}`;
