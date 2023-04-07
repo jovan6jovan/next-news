@@ -50,7 +50,7 @@ const SearchNewsPage: FC = () => {
       <Head>
         <title key="title">Search news | Next News</title>
       </Head>
-      <main className="container pt-5">
+      <main className="pt-5">
         <Title title="Search News" />
         <form className="field" onSubmit={handleSubmit}>
           <Label cssClass="label">Browse by category</Label>

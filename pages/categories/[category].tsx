@@ -1,8 +1,6 @@
 import { generateTopHeadlinesByCategoryRoute } from "@/routes";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
-import Container from "@/src/containers/Container/Container";
-import Section from "@/src/containers/Section/Section";
 import { ArticleResponse } from "@/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
@@ -49,12 +47,8 @@ const Category: FC<CategoryProps> = ({ articles }) => {
       <Head>
         <title key="title">{`${title} - Next News`}</title>
       </Head>
-      <Section>
-        <Container>
-          <Title title={title} />
-          <ArticlesGrid articles={articles} />
-        </Container>
-      </Section>
+      <Title title={title} />
+      <ArticlesGrid articles={articles} />
     </>
   );
 };

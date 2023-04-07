@@ -1,8 +1,6 @@
 import { TOP_US_GENERAL_HEADLINES } from "@/routes";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
-import Container from "@/src/containers/Container/Container";
-import Section from "@/src/containers/Section/Section";
 import { Article, ArticleResponse } from "@/types";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -29,12 +27,8 @@ const Home: FC<Props> = ({ newsArticles }) => {
       <Head>
         <title key="title">Breaking news | Next News</title>
       </Head>
-      <Section>
-        <Container>
-          <Title title="Breaking News" />
-          <ArticlesGrid articles={newsArticles} />
-        </Container>
-      </Section>
+      <Title title="Breaking News" />
+      <ArticlesGrid articles={newsArticles} />
     </>
   );
 };

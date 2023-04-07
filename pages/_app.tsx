@@ -1,3 +1,6 @@
+import Navbar from "@/src/components/Navbar/Navbar";
+import Container from "@/src/containers/Container/Container";
+import Section from "@/src/containers/Section/Section";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -19,7 +22,12 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         ></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <Navbar />
+      <Section>
+        <Container>
+          <Component {...pageProps} />
+        </Container>
+      </Section>
     </div>
   );
 };
