@@ -4,6 +4,7 @@ import Section from "@/src/containers/Section/Section";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import NextNProgress from "nextjs-progressbar";
 import { FC } from "react";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
@@ -22,6 +23,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         ></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <NextNProgress />
       <Navbar />
       <Section>
         <Container>

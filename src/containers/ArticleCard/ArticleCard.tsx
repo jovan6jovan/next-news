@@ -1,5 +1,6 @@
 import { validateImageUrl } from "@/src/utils/validateImageUrl";
 import { Article } from "@/types";
+import Image from "next/image";
 import { FC } from "react";
 
 interface Props {
@@ -14,8 +15,13 @@ const ArticleCard: FC<Props> = ({ article }) => {
     <a href={url} target="_blank">
       <div className="card">
         <div className="card-image">
-          <figure className="image is-4by3">
-            <img src={imageToUse} />
+          <figure className="image is-4by2">
+            <Image
+              src={imageToUse}
+              alt="Next News - article image"
+              width={500}
+              height={200}
+            />
           </figure>
         </div>
         <div className="card-content">
