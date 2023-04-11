@@ -1,4 +1,5 @@
 import { generateTopHeadlinesByCategoryRoute } from "@/routes";
+import Alert from "@/src/components/Alert/Alert";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
 import { ArticleResponse } from "@/types";
@@ -32,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       articles: newsResponse.articles,
     },
-    revalidate: 120,
+    revalidate: 300,
   };
 };
 
@@ -48,6 +49,14 @@ const Category: FC<CategoryProps> = ({ articles }) => {
         <title key="title">{`${title} - Next News`}</title>
       </Head>
       <Title title={title} />
+      <Alert>
+        This page uses <strong>getStaticProps</strong> for pre-rendering of
+        pages at build time, resulting in faster load times and better{" "}
+        <strong>SEO optimization</strong>.
+        <br />
+        It also enables <strong>incremental static regeneration</strong> to show
+        data not older than <strong>5 minutes</strong>.
+      </Alert>
       <ArticlesGrid articles={articles} />
     </>
   );

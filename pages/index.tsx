@@ -1,4 +1,5 @@
 import { TOP_US_GENERAL_HEADLINES } from "@/routes";
+import Alert from "@/src/components/Alert/Alert";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
 import { Article, ArticleResponse } from "@/types";
@@ -28,6 +29,11 @@ const Home: FC<Props> = ({ newsArticles }) => {
         <title key="title">Breaking news | Next News</title>
       </Head>
       <Title title="Breaking News" />
+      <Alert>
+        This page uses <strong>getServerSideProps</strong> to fetch data on the
+        server before rendering a page. This allows faster load times and better{" "}
+        <strong>SEO optimization</strong>.
+      </Alert>
       <ArticlesGrid articles={newsArticles} />
     </>
   );

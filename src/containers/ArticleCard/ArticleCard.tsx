@@ -1,5 +1,6 @@
-import { validateImageUrl } from "@/src/utils/validateImageUrl";
 import { Article } from "@/types";
+import { formatDate } from "@/utils/date";
+import { validateImageUrl } from "@/utils/validateImageUrl";
 import Image from "next/image";
 import { FC } from "react";
 
@@ -10,6 +11,7 @@ interface Props {
 const ArticleCard: FC<Props> = ({ article }) => {
   const { title, author, description, url, urlToImage, publishedAt } = article;
   const imageToUse = validateImageUrl(urlToImage as string);
+  const formattedDate = formatDate(publishedAt);
 
   return (
     <a href={url} target="_blank">
@@ -35,8 +37,8 @@ const ArticleCard: FC<Props> = ({ article }) => {
           <div className="content">
             {description}
             <br />
-            <p>
-              <i>{publishedAt}</i>
+            <p className="mt-2">
+              Published: <i>{formattedDate}</i>
             </p>
           </div>
         </div>

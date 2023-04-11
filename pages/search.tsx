@@ -1,4 +1,5 @@
 import { generateSearchNewsRoute } from "@/routes";
+import Alert from "@/src/components/Alert/Alert";
 import Button from "@/src/components/Button/Button";
 import Input from "@/src/components/FormElements/Input/Input";
 import Label from "@/src/components/FormElements/Label/Label";
@@ -52,6 +53,10 @@ const SearchNewsPage: FC = () => {
       </Head>
       <main className="pt-5">
         <Title title="Search News" />
+        <Alert>
+          This page uses <strong>client-side data fetching</strong> to show
+          real-time data. Requests are handled via <strong>API routes</strong>.
+        </Alert>
         <form className="field" onSubmit={handleSubmit}>
           <Label cssClass="label">Browse by category</Label>
           <div className="control">
