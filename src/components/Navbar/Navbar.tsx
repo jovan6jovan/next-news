@@ -1,27 +1,29 @@
 import Container from "@/src/containers/Container/Container";
+import { Context } from "@/src/store/context";
+import { ActionType } from "@/src/store/types";
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import styles from "./Navbar.module.css";
 import { renderDropDownLinks } from "./Navbar.utils";
 
 const Navbar: FC = () => {
+  const { state, dispatch } = useContext(Context);
+  const { isDropdownMenuOpen } = state;
   const [isMobileNavbarActive, setIsMobileNavbarActive] = useState(false);
-  const [isMobileDropdownActive, setIsMobileDropdownActive] = useState(false);
 
   const isActiveMobileNavbarCSSClass = `${
     isMobileNavbarActive ? "is-active" : ""
   }`;
-  const isActiveMobileDropdownCSSClass = `${
-    isMobileDropdownActive ? "is-active" : ""
-  }`;
+  const isActiveDropdownCSSClass = `${isDropdownMenuOpen ? "is-active" : ""}`;
 
-  const toggleMobileNavbar = () => {
+  const toggleMobileNavbar = () =>
     setIsMobileNavbarActive(!isMobileNavbarActive);
-  };
 
-  const toggleMobileDropdown = () => {
-    setIsMobileDropdownActive(!isMobileDropdownActive);
-  };
+  const toggleDropdown = () =>
+    dispatch({
+      type: ActionType.SET_IS_DROPDOWN_MENU_OPEN,
+      payload: !isDropdownMenuOpen,
+    });
 
   return (
     <nav
@@ -61,12 +63,12 @@ const Navbar: FC = () => {
                 Search
               </Link>
 
-              <div className={`dropdown ${isActiveMobileDropdownCSSClass}`}>
+              <div className={`dropdown ${isActiveDropdownCSSClass}`}>
                 <div className="dropdown-trigger">
                   <a
                     className={`navbar-item navbar-link ${styles.isNotHoverable} has-text-white`}
                     aria-haspopup="true"
-                    onClick={toggleMobileDropdown}
+                    onClick={toggleDropdown}
                   >
                     Categories
                   </a>

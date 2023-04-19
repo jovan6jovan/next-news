@@ -1,6 +1,7 @@
 import Navbar from "@/src/components/Navbar/Navbar";
 import Container from "@/src/containers/Container/Container";
 import Section from "@/src/containers/Section/Section";
+import { Provider } from "@/src/store/provider";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -24,12 +25,14 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NextNProgress />
-      <Navbar />
-      <Section>
-        <Container>
-          <Component {...pageProps} />
-        </Container>
-      </Section>
+      <Provider>
+        <Navbar />
+        <Section>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </Section>
+      </Provider>
     </div>
   );
 };
