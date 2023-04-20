@@ -51,7 +51,7 @@ const SearchNewsPage: FC = () => {
       <Head>
         <title key="title">Search news | Next News</title>
       </Head>
-      <main className="pt-5">
+      <main>
         <Title title="Search News" />
         <Alert>
           This page uses <strong>client-side data fetching</strong> to show

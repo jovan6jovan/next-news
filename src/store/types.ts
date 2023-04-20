@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 
 export enum ActionType {
+  SET_IS_MOBILE_MENU_OPEN = "SET_IS_MOBILE_MENU_OPEN",
   SET_IS_DROPDOWN_MENU_OPEN = "SET_IS_DROPDOWN_MENU_OPEN",
 }
 
@@ -10,6 +11,7 @@ export interface Action {
 }
 
 export interface State {
+  isMobileMenuOpen: boolean;
   isDropdownMenuOpen: boolean;
 }
 

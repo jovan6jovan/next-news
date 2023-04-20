@@ -2,27 +2,33 @@ import Container from "@/src/containers/Container/Container";
 import { Context } from "@/src/store/context";
 import { ActionType } from "@/src/store/types";
 import Link from "next/link";
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import styles from "./Navbar.module.css";
 import { renderDropDownLinks } from "./Navbar.utils";
 
 const Navbar: FC = () => {
   const { state, dispatch } = useContext(Context);
-  const { isDropdownMenuOpen } = state;
-  const [isMobileNavbarActive, setIsMobileNavbarActive] = useState(false);
+  const { isMobileMenuOpen, isDropdownMenuOpen } = state;
 
-  const isActiveMobileNavbarCSSClass = `${
-    isMobileNavbarActive ? "is-active" : ""
-  }`;
+  const isActiveMobileNavbarCSSClass = `${isMobileMenuOpen ? "is-active" : ""}`;
   const isActiveDropdownCSSClass = `${isDropdownMenuOpen ? "is-active" : ""}`;
 
-  const toggleMobileNavbar = () =>
-    setIsMobileNavbarActive(!isMobileNavbarActive);
+  const toggleMobileMenu = () =>
+    dispatch({
+      type: ActionType.SET_IS_MOBILE_MENU_OPEN,
+      payload: !isMobileMenuOpen,
+    });
 
-  const toggleDropdown = () =>
+  const toggleDropdownMenu = () =>
     dispatch({
       type: ActionType.SET_IS_DROPDOWN_MENU_OPEN,
       payload: !isDropdownMenuOpen,
+    });
+
+  const handleNavbarLinkClick = () =>
+    dispatch({
+      type: ActionType.SET_IS_MOBILE_MENU_OPEN,
+      payload: false,
     });
 
   return (
@@ -33,7 +39,11 @@ const Navbar: FC = () => {
     >
       <Container>
         <div className="navbar-brand">
-          <Link className="navbar-item is-size-4" href="/">
+          <Link
+            className="navbar-item is-size-4"
+            href="/"
+            onClick={handleNavbarLinkClick}
+          >
             NEXT NEWS
           </Link>
 
@@ -42,7 +52,7 @@ const Navbar: FC = () => {
             className={`navbar-burger burger ${isActiveMobileNavbarCSSClass}`}
             aria-label="menu"
             aria-expanded="false"
-            onClick={toggleMobileNavbar}
+            onClick={toggleMobileMenu}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -59,6 +69,7 @@ const Navbar: FC = () => {
               <Link
                 href="/search"
                 className={`navbar-item ${styles.isNotHoverable} has-text-white is-size-6`}
+                onClick={handleNavbarLinkClick}
               >
                 Search
               </Link>
@@ -68,7 +79,7 @@ const Navbar: FC = () => {
                   <a
                     className={`navbar-item navbar-link ${styles.isNotHoverable} has-text-white`}
                     aria-haspopup="true"
-                    onClick={toggleDropdown}
+                    onClick={toggleDropdownMenu}
                   >
                     Categories
                   </a>

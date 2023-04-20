@@ -8,11 +8,17 @@ export const renderDropDownLinks = () => {
   const { dispatch } = useContext(Context);
   const categorySlugs = Object.values(CategorySlugs);
 
-  const handleClick = () =>
+  const handleClick = () => {
     dispatch({
       type: ActionType.SET_IS_DROPDOWN_MENU_OPEN,
       payload: false,
     });
+
+    dispatch({
+      type: ActionType.SET_IS_MOBILE_MENU_OPEN,
+      payload: false,
+    });
+  };
 
   return categorySlugs.map((slug) => (
     <Link
