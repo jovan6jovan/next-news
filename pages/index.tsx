@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { FC, useState } from "react";
 
 interface Props {
-  newsArticles: Article[];
+  articles: Article[];
   totalPages: number;
 }
 
@@ -18,24 +18,28 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
 }) => {
   const page = Number(query.page) || 1;
-  const { newsArticles, totalPages } = await getPaginatedNewsArticles(page);
+  const { articles, totalPages } = await getPaginatedNewsArticles(page);
 
   return {
     props: {
-      newsArticles,
+      articles,
       totalPages,
     },
   };
 };
 
-const Home: FC<Props> = ({ newsArticles, totalPages }) => {
+const Home: FC<Props> = ({ articles, totalPages }) => {
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const hasArticles = articles.length > 0;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+
+    const query = page === 1 ? {} : { page };
+
     router.replace({
-      query: { page },
+      query,
     });
   };
 
@@ -50,12 +54,14 @@ const Home: FC<Props> = ({ newsArticles, totalPages }) => {
         server before rendering a page. This allows faster load times and better{" "}
         <strong>SEO optimization</strong>.
       </Alert>
-      <ArticlesGrid articles={newsArticles} />
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      <ArticlesGrid articles={articles} />
+      {hasArticles && (
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </>
   );
 };

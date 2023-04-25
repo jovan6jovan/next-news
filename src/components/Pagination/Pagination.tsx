@@ -9,6 +9,8 @@ interface Props {
 const Pagination: FC<Props> = ({ currentPage, totalPages, onPageChange }) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
+  const isPrevBtnDisabled = isFirstPage ? "is-disabled" : "";
+  const isNextBtnDisabled = isLastPage ? "is-disabled" : "";
 
   const handleClick = (page: number) => {
     const earlyReturnStatement = page < 1 || page > totalPages;
@@ -48,12 +50,12 @@ const Pagination: FC<Props> = ({ currentPage, totalPages, onPageChange }) => {
 
       return (
         <li key={pageNumber}>
-          <button
+          <a
             className={`pagination-link ${active}`}
             onClick={() => handleClick(pageNumber)}
           >
             {pageNumber}
-          </button>
+          </a>
         </li>
       );
     });
@@ -61,29 +63,27 @@ const Pagination: FC<Props> = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <nav
-      className="pagination is-centered"
+      className="pagination is-right mt-6"
       role="navigation"
       aria-label="pagination"
     >
       <ul className="pagination-list">
         <li>
-          <button
-            className="pagination-previous"
+          <a
+            className={`pagination-previous ${isPrevBtnDisabled}`}
             onClick={handlePrevClick}
-            disabled={isFirstPage}
           >
             Previous
-          </button>
+          </a>
         </li>
         {renderPageNumbers()}
         <li>
-          <button
-            className="pagination-next"
+          <a
+            className={`pagination-next ${isNextBtnDisabled}`}
             onClick={handleNextClick}
-            disabled={isLastPage}
           >
             Next
-          </button>
+          </a>
         </li>
       </ul>
     </nav>
