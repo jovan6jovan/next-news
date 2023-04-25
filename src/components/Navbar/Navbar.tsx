@@ -1,14 +1,16 @@
+import useClickOutside from "@/hooks/useClickOutside";
 import Container from "@/src/containers/Container/Container";
 import { Context } from "@/src/store/context";
 import { ActionType } from "@/src/store/types";
 import Link from "next/link";
-import { FC, useContext } from "react";
+import { FC, useContext, useRef } from "react";
 import styles from "./Navbar.module.css";
 import { renderDropDownLinks } from "./Navbar.utils";
 
 const Navbar: FC = () => {
   const { state, dispatch } = useContext(Context);
   const { isMobileMenuOpen, isDropdownMenuOpen } = state;
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isActiveMobileNavbarCSSClass = `${isMobileMenuOpen ? "is-active" : ""}`;
   const isActiveDropdownCSSClass = `${isDropdownMenuOpen ? "is-active" : ""}`;
@@ -30,6 +32,15 @@ const Navbar: FC = () => {
       type: ActionType.SET_IS_MOBILE_MENU_OPEN,
       payload: false,
     });
+
+  const handleClickOutside = () => {
+    dispatch({
+      type: ActionType.SET_IS_DROPDOWN_MENU_OPEN,
+      payload: false,
+    });
+  };
+
+  useClickOutside(dropdownRef, handleClickOutside);
 
   return (
     <nav
@@ -74,7 +85,10 @@ const Navbar: FC = () => {
                 Search
               </Link>
 
-              <div className={`dropdown ${isActiveDropdownCSSClass}`}>
+              <div
+                className={`dropdown ${isActiveDropdownCSSClass}`}
+                ref={dropdownRef}
+              >
                 <div className="dropdown-trigger">
                   <a
                     className={`navbar-item navbar-link ${styles.isNotHoverable} has-text-white`}
