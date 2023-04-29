@@ -1,8 +1,10 @@
+import { ARTICLES_PER_PAGE } from "@/constants";
 import { generateSearchNewsRoute } from "@/routes";
 import Alert from "@/src/components/Alert/Alert";
 import Button from "@/src/components/Button/Button";
 import Input from "@/src/components/FormElements/Input/Input";
 import Label from "@/src/components/FormElements/Label/Label";
+import Pagination from "@/src/components/Pagination/Pagination";
 import Spinner from "@/src/components/Spinner/Spinner";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
@@ -15,10 +17,16 @@ const SearchNewsPage: FC = () => {
   const [searchResults, setSearchResults] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const searchNewsRoute = generateSearchNewsRoute(searchTerm);
   const searchBtnDisabled = isLoading || !searchTerm.length;
   const notEmptySearchTerm = searchTerm !== "";
+  const hasSearchResults = searchResults.length > 0;
+  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const endIndex = startIndex + ARTICLES_PER_PAGE;
+  const displayedArticles = searchResults.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(searchResults.length / ARTICLES_PER_PAGE);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     setSearchTerm(e.currentTarget.value);
@@ -43,6 +51,7 @@ const SearchNewsPage: FC = () => {
       }
     } else {
       setSearchResults([]);
+      setCurrentPage(1);
     }
   };
 
@@ -81,7 +90,16 @@ const SearchNewsPage: FC = () => {
             {isLoading && <Spinner />}
           </div>
           {error && <p>Something went wrong. Please try again.</p>}
-          {searchResults && <ArticlesGrid articles={searchResults} />}
+          {hasSearchResults && (
+            <>
+              <ArticlesGrid articles={displayedArticles} />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            </>
+          )}
         </div>
       </main>
     </>

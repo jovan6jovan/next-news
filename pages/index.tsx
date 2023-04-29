@@ -3,7 +3,7 @@ import Pagination from "@/src/components/Pagination/Pagination";
 import Title from "@/src/components/Title/Title";
 import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
 import { Article } from "@/types";
-import { getPaginatedNewsArticles } from "@/utils/pagination";
+import { getPaginatedBreakingNewsArticles } from "@/utils/pagination";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
 }) => {
   const page = Number(query.page) || 1;
-  const { articles, totalPages } = await getPaginatedNewsArticles(page);
+  const { articles, totalPages } = await getPaginatedBreakingNewsArticles(page);
 
   return {
     props: {
