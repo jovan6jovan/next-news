@@ -1,7 +1,7 @@
 import { generateTopHeadlinesByCategoryRoute } from "@/routes";
 import Alert from "@/src/components/Alert/Alert";
 import Title from "@/src/components/Title/Title";
-import ArticlesGrid from "@/src/containers/ArticlesGrid/ArticlesGrid";
+import ArticlesWithPagination from "@/src/containers/ArticlesWithPagination/ArticlesWithPagination";
 import { ArticleResponse } from "@/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
@@ -57,7 +57,7 @@ const Category: FC<CategoryProps> = ({ articles }) => {
         It also enables <strong>incremental static regeneration</strong> to show
         data not older than <strong>5 minutes</strong>.
       </Alert>
-      <ArticlesGrid articles={articles} />
+      <ArticlesWithPagination articles={articles} />
     </>
   );
 };
