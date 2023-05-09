@@ -2,12 +2,11 @@ import { generateTopHeadlinesByCategoryRoute } from "@/routes";
 import Alert from "@/src/components/Alert/Alert";
 import Title from "@/src/components/Title/Title";
 import ArticlesWithPagination from "@/src/containers/ArticlesWithPagination/ArticlesWithPagination";
-import { ArticleResponse } from "@/types";
+import { ArticleResponse, CategoryProps, CategorySlugs } from "@/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC } from "react";
-import { CategoryProps, CategorySlugs } from "./category.types";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const categorySlugs = Object.values(CategorySlugs);
