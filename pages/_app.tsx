@@ -1,5 +1,5 @@
-import Navbar from "@/src/components/Navbar/Navbar";
 import Container from "@/src/containers/Container/Container";
+import Navbar from "@/src/containers/Navbar/Navbar";
 import Section from "@/src/containers/Section/Section";
 import { Provider } from "@/src/store/provider";
 import "@/styles/globals.css";

@@ -2,9 +2,9 @@ import { CategorySlugs } from "@/pages/categories/category.types";
 import { Context } from "@/src/store/context";
 import { ActionType } from "@/src/store/types";
 import Link from "next/link";
-import { useContext } from "react";
+import { FC, useContext } from "react";
 
-export const renderDropDownLinks = () => {
+const DropDownLinks: FC = () => {
   const { dispatch } = useContext(Context);
   const categorySlugs = Object.values(CategorySlugs);
 
@@ -20,14 +20,20 @@ export const renderDropDownLinks = () => {
     });
   };
 
-  return categorySlugs.map((slug) => (
-    <Link
-      key={slug}
-      href={`/categories/${slug}`}
-      className="navbar-item"
-      onClick={handleClick}
-    >
-      {slug}
-    </Link>
-  ));
+  return (
+    <>
+      {categorySlugs.map((slug) => (
+        <Link
+          key={slug}
+          href={`/categories/${slug}`}
+          className="navbar-item"
+          onClick={handleClick}
+        >
+          {slug}
+        </Link>
+      ))}
+    </>
+  );
 };
+
+export default DropDownLinks;

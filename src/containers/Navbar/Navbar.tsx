@@ -4,8 +4,8 @@ import { Context } from "@/src/store/context";
 import { ActionType } from "@/src/store/types";
 import Link from "next/link";
 import { FC, useContext, useRef } from "react";
+import DropDownLinks from "./DropDownLinks/DropDownLinks";
 import styles from "./Navbar.module.css";
-import { renderDropDownLinks } from "./Navbar.utils";
 
 const Navbar: FC = () => {
   const { state, dispatch } = useContext(Context);
@@ -100,7 +100,7 @@ const Navbar: FC = () => {
                 </div>
                 <div className="dropdown-menu" id="dropdown-menu3" role="menu">
                   <div className="dropdown-content">
-                    {renderDropDownLinks()}
+                    <DropDownLinks />
                   </div>
                 </div>
               </div>
